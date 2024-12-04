@@ -1,45 +1,132 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-
+import { Platform, Text, Image } from 'react-native';
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: 'Inicio',
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('../../assets/images/homeselected.png')
+                  : require('../../assets/images/home.png')
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter', // Asegúrate de tener esta fuente disponible
+                color: focused ? '#000' : '#757575',
+                fontWeight: focused ? 'bold' : 'normal',
+              }}
+            >
+              Inicio
+            </Text>
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="chat"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Chat de IA',
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('../../assets/images/chatselected.png')
+                  : require('../../assets/images/chat.png')
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter',
+                color: focused ? '#000' : '#757575',
+                fontWeight: focused ? 'bold' : 'normal',
+              }}
+            >
+              Chat de IA
+            </Text>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="HistorialScreen"
+        options={{
+          title: 'Historial',
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('../../assets/images/historialselected.png')
+                  : require('../../assets/images/historial.png')
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter',
+                color: focused ? '#000' : '#757575',
+                fontWeight: focused ? 'bold' : 'normal',
+              }}
+            >
+              Historial
+            </Text>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="ConfiguracionScreen"
+        options={{
+          title: 'Configuración',
+          tabBarIcon: ({ color, focused }) => (
+            <Image
+              source={
+                focused
+                  ? require('../../assets/images/configuracionselected.png')
+                  : require('../../assets/images/configuracion.png')
+              }
+              style={{ width: 24, height: 24 }}
+            />
+          ),
+          tabBarLabel: ({ focused }) => (
+            <Text
+              style={{
+                fontSize: 12,
+                fontFamily: 'Inter',
+                color: focused ? '#000' : '#757575',
+                fontWeight: focused ? 'bold' : 'normal',
+              }}
+            >
+              Configuración
+            </Text>
+          ),
         }}
       />
     </Tabs>
   );
 }
+
